@@ -13,7 +13,8 @@ A ControllerBase é uma base disponivel no framework ASP.NET Core que possibilit
 Os models são classes que representam as entidades ou objetos de negócios que a aplicação está manipulando. Eles representam a estrutura dos dados que a API recebe, processa e retorna. Os models encapsulam as propriedades e comportamentos dessas entidades, permitindo uma manipulação mais estruturada e segura dos dados.
 
 b) Em sala, mostramos que ao abrir um nagevador conseguimos chamar uma rota GET e POST não , explique por que só conseguimos executar a Rota GET no browser.
-Os navegadores permitem que você faça solicitações GET diretamente da barra de endereços porque são consideradas solicitações seguras e não impactantes. No entanto, as solicitações de POST são usadas para enviar dados para o servidor. Essas solicitações podem ter efeitos destrutivos ou causar alterações nos dados do servidor, por isso os navegadores geralmente não executam automaticamente solicitações POST quando você tenta procurar a URL
+Os navegadores permitem que você faça solicitações GET diretamente da barra de endereços porque são consideradas solicitações seguras e não impactantes. No entanto, as solicitações de POST são usadas para enviar dados para o servidor. 
+Essas solicitações podem ter efeitos destrutivos ou causar alterações nos dados do servidor, por isso os navegadores geralmente não executam automaticamente solicitações POST quando você tenta procurar a URL
 
 c) Qual o papel do Swagger, por que utilizamos ele?
 O Swagger é utilizado para testar as solicitações, como na resposta(letra b) acima ao inves de testar o POST no browser, testamos no Swagger. Ele facilita a documentação, visualização, testes e padronização de APIs.
