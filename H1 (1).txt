@@ -1,0 +1,49 @@
+Questão 1:Diferencie front end e backend. Cite duas tecnologias em cada uma delas.
+
+O front-end se concentra na criação da interface que os usuários interagem, enquanto o back-end trata da lógica, processamento e gerenciamento de dados por trás das cenas.
+Front-end: React.js e Vue.js
+
+Back-end: JavaScript e C#
+
+Questão 2: Nos conceitos estudados em aula, falamos sobre controller e models. Responda:
+a) Defina o papel de cada um e responda por que ao criarmos nosso controller fizemos uma herança de controllerbase?
+Controler funciona como um intermediario entre as solicitações e as operações http a serem feita pelos clientes. O controller determina qual ação (método) deve ser executada com base na rota e no método HTTP da solicitação.
+A ControllerBase é uma base disponivel no framework ASP.NET Core que possibilita facilitar a criação de novos controllers herdando padrões que serão necessarios nos controllers e são encontrados na ControllerBase. Ela fornece recursos básicos para o roteamento de solicitações, manipulação de ações e gerenciamento de respostas.
+
+Os models são classes que representam as entidades ou objetos de negócios que a aplicação está manipulando. Eles representam a estrutura dos dados que a API recebe, processa e retorna. Os models encapsulam as propriedades e comportamentos dessas entidades, permitindo uma manipulação mais estruturada e segura dos dados.
+
+b) Em sala, mostramos que ao abrir um nagevador conseguimos chamar uma rota GET e POST não , explique por que só conseguimos executar a Rota GET no browser.
+Os navegadores permitem que você faça solicitações GET diretamente da barra de endereços porque são consideradas solicitações seguras e não impactantes. No entanto, as solicitações de POST são usadas para enviar dados para o servidor. Essas solicitações podem ter efeitos destrutivos ou causar alterações nos dados do servidor, por isso os navegadores geralmente não executam automaticamente solicitações POST quando você tenta procurar a URL
+
+c) Qual o papel do Swagger, por que utilizamos ele?
+O Swagger é utilizado para testar as solicitações, como na resposta(letra b) acima ao inves de testar o POST no browser, testamos no Swagger. Ele facilita a documentação, visualização, testes e padronização de APIs.
+
+Questão 3:Dadas ações cite o verbo http correto para utilizarmos, considere ações no AVA do uniaraxá:
+a) Criar a aula: POST
+b) Remover um material: DELETE
+c) Listar as disciplinas disponíveis para o professor no semestre: GET
+d) Listas os alunos da disciplina: GET
+e) Atualizar um material: PUT (obs: caso seja atualização completa, verbo PUT. Caso seja apenas atualização parcial dos dados, verbo PATCH)
+f) Lançar uma nota: POST (obs: caso seja uma nova nota, verbo POST. Caso esteja atualizando a nota, verbo PUT)
+
+Questão 4:Em sala mostramos que ao fazer um return da action utilizamos um Status Http , por exemplo, Ok(), BadRequest(), NotFound() , entre outros. Especifique a diferença de cada um.
+
+Ok(): Este método retorna um status HTTP 200 (OK) significa que a requisição foi bem-sucedida. Ele é usado quando a operação solicitada foi executada com sucesso e você deseja retornar uma resposta com algum conteúdo, como um JSON ou HTML.
+
+BadRequest(): Esse método retorna um status HTTP 400 (Bad Request) e é usado quando a requisição do cliente não pôde ser entendida ou processada pelo servidor. Isso geralmente ocorre quando os parâmetros da requisição estão ausentes, inválidos ou em um formato incorreto.
+
+NotFound(): Esse método retorna um status HTTP 404 (Not Found) e é usado quando o servidor não consegue encontrar o recurso solicitado pelo cliente. Isso pode acontecer quando uma URL não corresponde a nenhum roteamento configurado ou quando o recurso não existe no servidor.
+
+Questão 5:A seguir , temos um exemplo de endpoint de API: https://minhaapi.com.br/api/vendas
+explique cada parte:
+• https://
+• minhaapi.com.br
+• /api/vendas
+
+Um endpoint de API é a combinação de protocolo, domínio e caminho que direciona o cliente para um recurso específico na API.
+
+https://: É o protocolo de comunicação que está sendo usado para acessar a API. "HTTPS" é uma versão segura do protocolo HTTP que criptografa os dados transmitidos entre o cliente (geralmente um navegador ou aplicativo) e o servidor.
+
+minhaapi.com.br: Essa é a parte do domínio da URL, é o endereço da API na internet. O domínio é um nome substituido para facil entendimento dos usuarios, porem os servidores da Internet usam endereços IP (por tras dos dominios) para identificar os locais.
+
+/api/vendas: É a parte do caminho (path) do URL. O caminho é uma forma de estruturar os recursos dentro do domínio da API, /api/vendas indica que estamos acessando a rota relacionada a vendas na API.
