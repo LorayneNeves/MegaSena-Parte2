@@ -1,8 +1,7 @@
 ﻿namespace WebAPI_ControleAluno.Models.Request
 {
-    public class AlunoViewModel
+    public class NovoAlunoViewModel
     {
-        public int Codigo { get; set; }
         public string Nome { get; set; }
         public int RA { get; set; }
         public string email { get; set; }
