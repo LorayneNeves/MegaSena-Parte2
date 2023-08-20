@@ -10,8 +10,8 @@ namespace WebAPI_ControleAluno.Controllers
     [Route("[controller]")]
     public class AlunoController : ControllerBase
     {
+        #region Metodos Arquivo Json
         private readonly string alunoCaminhoArquivo;
-
         public AlunoController()
         {
             alunoCaminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "Data", "aluno.json");
@@ -31,7 +31,6 @@ namespace WebAPI_ControleAluno.Controllers
             }
             return JsonConvert.DeserializeObject<List<AlunoViewModel>>(json);
         }
-
         private int ObterProximoCodigoDisponivel()
         {
             List<AlunoViewModel> alunos = LerAlunosArquivo();
@@ -49,7 +48,9 @@ namespace WebAPI_ControleAluno.Controllers
             string json = JsonConvert.SerializeObject(alunos);
             System.IO.File.WriteAllText(alunoCaminhoArquivo, json);
         }
+        #endregion
 
+        #region CRUD
         [HttpGet("{codigo}")]
         public IActionResult Get(int codigo)
         {
@@ -131,5 +132,6 @@ namespace WebAPI_ControleAluno.Controllers
 
             return NoContent();
         }
+        #endregion
     }
 }
