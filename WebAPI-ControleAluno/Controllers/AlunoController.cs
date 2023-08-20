@@ -117,7 +117,7 @@ namespace WebAPI_ControleAluno.Controllers
         }
 
         [HttpDelete("{codigo}")]
-        public IActionResult Delete(int codigo, AlunoViewModel alunoViewModel)
+        public IActionResult Delete(int codigo)
         {
             List<AlunoViewModel> alunos = LerAlunosArquivo();
             var alunoExistente = alunos.FirstOrDefault(p => p.Codigo == codigo);
