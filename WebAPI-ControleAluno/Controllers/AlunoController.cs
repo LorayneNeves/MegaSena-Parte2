@@ -8,7 +8,7 @@ namespace WebAPI_ControleAluno.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AlunoController : ControllerBase
+    public class AlunoController : PrincipalController
     {
         #region Metodos Arquivo Json
         private readonly string alunoCaminhoArquivo;
@@ -71,6 +71,11 @@ namespace WebAPI_ControleAluno.Controllers
         [HttpPost]
         public IActionResult Post(NovoAlunoViewModel novoAlunoViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequestResponse(ModelState);
+            }
+
             if (novoAlunoViewModel == null)
             {
                 return BadRequest();
