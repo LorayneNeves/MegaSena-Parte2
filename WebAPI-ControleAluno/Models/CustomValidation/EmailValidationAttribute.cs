@@ -17,9 +17,7 @@ namespace WebAPI_ControleAluno.Models.CustomValidation
 
         }
 
-        protected override ValidationResult IsValid(
-            object value,
-            ValidationContext validationContext)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
 
             // Verifica se o Valor é nulo

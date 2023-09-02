@@ -103,6 +103,16 @@ namespace WebAPI_ControleAluno.Controllers
         [HttpPut("{codigo}")]
         public IActionResult Put(int codigo, EditaAlunoViewModel editaAlunoViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequestResponse(ModelState);
+            }
+
+            if (editaAlunoViewModel == null)
+            {
+                return BadRequest();
+            }
+
             List<AlunoViewModel> listaTodosAlunos = LerAlunosArquivo();
             var alunoExistente = listaTodosAlunos.FirstOrDefault(p => p.Codigo == codigo);
 
