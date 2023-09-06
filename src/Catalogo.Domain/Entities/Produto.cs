@@ -9,6 +9,7 @@ namespace Catalogo.Domain.Entities
 {
     public class Produto
     {
+        private int qtdeEstoque;
         #region 1 - Contrutores
         public Produto(string nome, string descricao, bool ativo, decimal valor, DateTime dataCadastro, string imagem, int quantidadeEstoque)
         {
@@ -32,6 +33,15 @@ namespace Catalogo.Domain.Entities
             DataCadastro = dataCadastro;
             Imagem = imagem;
             QuantidadeEstoque = quantidadeEstoque;
+        }
+
+        public Produto(int codigo, string nome, int qtdeEstoque, DateTime dataCadastro, bool ativo)
+        {
+            Codigo = codigo;
+            Nome = nome;
+            this.qtdeEstoque = qtdeEstoque;
+            DataCadastro = dataCadastro;
+            Ativo = ativo;
         }
         #endregion
         #region 2 - Propriedades

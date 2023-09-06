@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catalogo.Application.Interfaces
+namespace LOJAH1.Catalogo.Application.Interfaces
 {
     public interface IProdutoService
     {
-        public void Adicionar(NovoProdutoViewModel novoProdutoViewModel);
+        void Adicionar(NovoProdutoViewModel novoProdutoViewModel);
+
     }
 }

@@ -8,5 +8,10 @@ namespace Catalogo.Application.ViewModels
 {
     public class NovoProdutoViewModel
     {
+        public int Codigo { get; set; }
+        public string Nome { get; set; }
+        public int QtdeEstoque { get; set; }
+        public DateTime DataCadastro { get; set; }
+        public bool Ativo { get; set; }
     }
 }

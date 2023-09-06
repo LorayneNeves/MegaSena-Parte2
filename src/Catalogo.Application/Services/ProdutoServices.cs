@@ -1,7 +1,7 @@
-﻿using Catalogo.Application.Interfaces;
-using Catalogo.Application.ViewModels;
+﻿using Catalogo.Application.ViewModels;
 using Catalogo.Domain.Entities;
 using Catalogo.Domain.Interfaces;
+using LOJAH1.Catalogo.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +10,24 @@ using System.Threading.Tasks;
 
 namespace Catalogo.Application.Services
 {
-    public class ProdutoServices : IProdutoService
+    public class ProdutoService : IProdutoService
     {
-        private readonly IProdutoRepository produtoRepository;
-        public ProdutoServices(IProdutoRepository produtoRepository)
+        private readonly IProdutoRepository _produtoRepository;
+
+        public ProdutoService(IProdutoRepository produtoRepository)
         {
-            produtoRepository = produtoRepository;
+            _produtoRepository = produtoRepository;
         }
 
         public void Adicionar(NovoProdutoViewModel novoProdutoViewModel)
         {
-            
-            throw new NotImplementedException();
+            _produtoRepository.Adicionar(new Domain.Entities.Produto(
+                 novoProdutoViewModel.Codigo,
+                 novoProdutoViewModel.Nome,
+                 novoProdutoViewModel.QtdeEstoque,
+                 novoProdutoViewModel.DataCadastro,
+                 novoProdutoViewModel.Ativo
+                ));
         }
-        
     }
 }
