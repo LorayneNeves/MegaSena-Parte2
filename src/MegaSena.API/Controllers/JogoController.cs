@@ -12,10 +12,10 @@ namespace MegaSena.API.Controllers
         private readonly string jogoCaminhoArquivo;
         public JogoController()
         {
-            jogoCaminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "Data", "jogo.json");
+            jogoCaminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "Data", "jogosMega.json");
         }
 
-        private List<JogoViewModel> LerAlunosArquivo()
+        private List<JogoViewModel> LerJogosArquivo()
         {
             if (!System.IO.File.Exists(jogoCaminhoArquivo))
             {
@@ -29,8 +29,19 @@ namespace MegaSena.API.Controllers
             }
             return JsonConvert.DeserializeObject<List<JogoViewModel>>(json);
         }
-       
-        private void EscreverAlunosNoArquivo(List<JogoViewModel> jogo)
+        private int ObterProximoCodigoDisponivel()
+        {
+            List<JogoViewModel> jogo = LerJogosArquivo();
+            if (jogo.Any())
+            {
+                return jogo.Max(p => p.Codigo) + 1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        private void EscreverNumerosNoArquivo(List<JogoViewModel> jogo)
         {
             string json = JsonConvert.SerializeObject(jogo);
             System.IO.File.WriteAllText(jogoCaminhoArquivo, json);
@@ -38,101 +49,52 @@ namespace MegaSena.API.Controllers
         #endregion
         #region CRUD
         [HttpGet("{codigo}")]
-        public IActionResult Get(int codigo)
+        public IActionResult ObterJogoEspecifico(int codigo)
         {
-            List<JogoViewModel> listaJogos = LerAlunosArquivo();
-            var jogoProcurado = listaJogos.Where(p => p.CPF == codigo);
+            List<JogoViewModel> listaJogos = LerJogosArquivo();
+            var jogoProcurado = listaJogos.Where(p => p.Codigo == codigo);
 
             if (!jogoProcurado.Any()) return NotFound();
             return Ok(jogoProcurado.First());
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult ObterTodosOsJogos()
         {
-            List<JogoViewModel> listaJogos = LerAlunosArquivo();
+            List<JogoViewModel> listaJogos = LerJogosArquivo();
             return Ok(listaJogos);
         }
 
         [HttpPost]
-        public IActionResult Post(NovoJogoViewModel novoJogoViewModel)
+        public IActionResult RegistrarJogo(NovoJogoViewModel novoJogoViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return ApiBadRequestResponse(ModelState);
             }
-
-            if (novoAlunoViewModel == null)
+            
+            if (novoJogoViewModel == null)
             {
                 return BadRequest();
             }
-
-            List<JogoViewModel> jogo = LerAlunosArquivo();
+            
+            List<JogoViewModel> jogo = LerJogosArquivo();
+            int proximoCodigo = ObterProximoCodigoDisponivel();
 
             JogoViewModel novoJogo = new JogoViewModel()
-            {
+            {             
                 Codigo = proximoCodigo,
-                RA = novoAlunoViewModel.RA,
-                Nome = novoAlunoViewModel.Nome,
-                CPF = novoAlunoViewModel.CPF,
-                email = novoAlunoViewModel.email,
-                Ativo = novoAlunoViewModel.Ativo
-
+                Nome = novoJogoViewModel.Nome,
+                Data = DateTime.Now,
+                CPF = novoJogoViewModel.CPF,
+                NumeroDoJogo = novoJogoViewModel.NumeroDoJogo
             };
-            alunos.Add(novoAluno);
-            EscreverAlunosNoArquivo(alunos);
+            jogo.Add(novoJogo);
+            EscreverNumerosNoArquivo(jogo);   
 
-            return CreatedAtAction(nameof(Get), new { codigo = novoAluno.Codigo }, novoAluno);
-        }
-
-        [HttpPut("{codigo}")]
-        public IActionResult Put(int codigo, EditaAlunoViewModel editaAlunoViewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return ApiBadRequestResponse(ModelState);
-            }
-
-            if (editaAlunoViewModel == null)
-            {
-                return BadRequest();
-            }
-
-            List<AlunoViewModel> listaTodosAlunos = LerAlunosArquivo();
-            var alunoExistente = listaTodosAlunos.FirstOrDefault(p => p.Codigo == codigo);
-
-            if (alunoExistente == null)
-            {
-                return NotFound();
-            }
-
-            alunoExistente.Nome = editaAlunoViewModel.Nome;
-            alunoExistente.CPF = editaAlunoViewModel.CPF;
-            alunoExistente.RA = editaAlunoViewModel.RA;
-            alunoExistente.email = editaAlunoViewModel.email;
-            alunoExistente.Ativo = editaAlunoViewModel.Ativo;
-
-            EscreverAlunosNoArquivo(listaTodosAlunos);
-            return Ok(alunoExistente);
-        }
-
-        [HttpDelete("{codigo}")]
-        public IActionResult Delete(int codigo)
-        {
-            List<AlunoViewModel> alunos = LerAlunosArquivo();
-            var alunoExistente = alunos.FirstOrDefault(p => p.Codigo == codigo);
-
-            if (alunoExistente == null)
-            {
-                return NotFound();
-            }
-
-            alunos.Remove(alunoExistente);
-            EscreverAlunosNoArquivo(alunos);
-
-            return NoContent();
-        }
+            return ApiResponse(novoJogo, "Jogo Registrado com sucesso!");
+        }       
         #endregion
     }
 }
-}
+
