@@ -49,7 +49,7 @@ namespace MegaSena.API.Controllers
         #endregion
         #region CRUD
         [HttpGet("{codigo}")]
-        public IActionResult ObterJogoEspecifico(int codigo)
+        public IActionResult ObterJogoEspecifico(int codigo) //dados de um jogo
         {
             List<JogoViewModel> listaJogos = LerJogosArquivo();
             var jogoProcurado = listaJogos.Where(p => p.Codigo == codigo);
@@ -59,7 +59,7 @@ namespace MegaSena.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodosOsJogos()
+        public IActionResult ObterTodosOsJogos() //dados de todos os jogos
         {
             List<JogoViewModel> listaJogos = LerJogosArquivo();
             return Ok(listaJogos);

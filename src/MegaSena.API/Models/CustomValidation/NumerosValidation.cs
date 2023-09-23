@@ -10,25 +10,25 @@ namespace MegaSena.API.Models.CustomValidation
         {
             if (value is int[] numeros)
             {
-                // Verifique se há exatamente 6 números
+                // Verifica se tem exatamente 6 numeros
                 if (numeros.Length != 6)
                 {
                     return new ValidationResult("Deve haver exatamente 6 números na Mega Sena.");
                 }
 
-                // Verifique se os números estão entre 1 e 60
+                // Verifica se os numeros estão entre 1 e 60
                 if (numeros.Any(numero => numero < 1 || numero > 60))
                 {
                     return new ValidationResult("Os números devem estar entre 1 e 60.");
                 }
 
-                // Verifique se os números são todos diferentes
+                // Verifica se os numeros são todos diferentes
                 if (numeros.Distinct().Count() != 6)
                 {
                     return new ValidationResult("Os 6 números devem ser diferentes.");
                 }
 
-                return ValidationResult.Success; // Validação bem-sucedida
+                return ValidationResult.Success;
             }
 
             // Se o valor não for um array de inteiros, a validação falha
