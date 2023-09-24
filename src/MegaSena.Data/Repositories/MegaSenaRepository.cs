@@ -61,7 +61,7 @@ namespace MegaSena.Data.Repository
 
         private int ObterProximoCodigoDisponivel()
         {
-            List<MegaSenaView> megaSena = LerJogosArquivo();
+            List<MegaSenaViewModel> megaSena = LerJogosArquivo();
             if (megaSena.Any())
             {
                 return megaSena.Max(p => p.Codigo) + 1;
