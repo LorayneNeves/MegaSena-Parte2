@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MegaSena.Domain", "src\Mega
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Data", "02 - Data", "{B005CB53-6CEB-46CB-A0D2-B76675C5F5FB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 Application", "03 Application", "{C4BE6B99-08BF-46FB-8319-17A50D35AA69}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Application", "03 - Application", "{C4BE6B99-08BF-46FB-8319-17A50D35AA69}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaSena.Data", "src\MegaSena.Data\MegaSena.Data.csproj", "{2A0D2E7F-F3F4-46AA-9E4C-BDD60B818BA4}"
 EndProject

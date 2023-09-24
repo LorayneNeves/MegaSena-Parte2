@@ -1,4 +1,6 @@
 ﻿using MegaSena.API.Models.Request;
+using MegaSena.Application.Interfaces;
+using MegaSena.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -6,95 +8,31 @@ namespace MegaSena.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class JogoController : PrincipalController
+    public class JogoController : ControllerBase
     {
-        #region Metodos Arquivo Json
-        private readonly string jogoCaminhoArquivo;
-        public JogoController()
+        private readonly IMegaSenaService _megaSenaService;
+
+        public JogoController(IMegaSenaService jogoService)
         {
-            jogoCaminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "Data", "jogosMega.json");
+            _megaSenaService = jogoService;
         }
 
-        private List<JogoViewModel> LerJogosArquivo()
+        [HttpPost(Name = "Adicionar")]
+        public IActionResult Post(NovaMegaSenaViewModel novaMegaSenaViewModel)
         {
-            if (!System.IO.File.Exists(jogoCaminhoArquivo))
-            {
-                return new List<JogoViewModel>();
-            }
+            _megaSenaService.Adicionar(novaMegaSenaViewModel);
 
-            string json = System.IO.File.ReadAllText(jogoCaminhoArquivo);
-            if (string.IsNullOrEmpty(json))
-            {
-                return new List<JogoViewModel>();
-            }
-            return JsonConvert.DeserializeObject<List<JogoViewModel>>(json);
+            return Ok();
         }
-        private int ObterProximoCodigoDisponivel()
+        [HttpGet(Name = "ObterTodos")]
+        public IActionResult Get(NovaMegaSenaViewModel novaMegaSenaViewModel)
         {
-            List<JogoViewModel> jogo = LerJogosArquivo();
-            if (jogo.Any())
-            {
-                return jogo.Max(p => p.Codigo) + 1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
-        private void EscreverNumerosNoArquivo(List<JogoViewModel> jogo)
-        {
-            string json = JsonConvert.SerializeObject(jogo);
-            System.IO.File.WriteAllText(jogoCaminhoArquivo, json);
-        }
-        #endregion
-        #region CRUD
-        [HttpGet("{codigo}")]
-        public IActionResult ObterJogoEspecifico(int codigo) //dados de um jogo
-        {
-            List<JogoViewModel> listaJogos = LerJogosArquivo();
-            var jogoProcurado = listaJogos.Where(p => p.Codigo == codigo);
-
-            if (!jogoProcurado.Any()) return NotFound();
-            return Ok(jogoProcurado.First());
-        }
-
-        [HttpGet]
-        public IActionResult ObterTodosOsJogos() //dados de todos os jogos
-        {
-            List<JogoViewModel> listaJogos = LerJogosArquivo();
+            _megaSenaService.ObterTodos(novaMegaSenaViewModel);
+            List<MegaSenaViewModel> listaJogos = ();
+            listaJogos = LerJogosArquivo();
             return Ok(listaJogos);
         }
-
-        [HttpPost]
-        public IActionResult RegistrarJogo(NovoJogoViewModel novoJogoViewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return ApiBadRequestResponse(ModelState);
-            }
-            
-            if (novoJogoViewModel == null)
-            {
-                return BadRequest();
-            }
-            
-            List<JogoViewModel> jogo = LerJogosArquivo();
-            int proximoCodigo = ObterProximoCodigoDisponivel();
-
-            JogoViewModel novoJogo = new JogoViewModel()
-            {             
-                Codigo = proximoCodigo,
-                Nome = novoJogoViewModel.Nome,
-                Data = DateTime.Now,
-                CPF = novoJogoViewModel.CPF,
-                NumeroDoJogo = novoJogoViewModel.NumeroDoJogo
-            };
-            jogo.Add(novoJogo);
-            EscreverNumerosNoArquivo(jogo);   
-
-            return ApiResponse(novoJogo, "Jogo Registrado com sucesso!");
-        }       
-        #endregion
     }
+    
 }
 
