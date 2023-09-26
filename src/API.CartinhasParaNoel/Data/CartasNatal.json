@@ -1,0 +1,1 @@
+[{"idCarta":1,"nome":"teste","rua":null,"cidade":null,"bairro":null,"estado":null,"numero":0,"idade":10,"descricao":"string"},{"idCarta":2,"nome":"teste2","rua":"teste2","cidade":"teste2","bairro":"teste2","estado":"teste2","numero":100,"idade":10,"descricao":"teste2"}]

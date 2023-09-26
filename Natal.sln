@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{74BEBD96-A1B1-43B3-AB0D-4830C15297B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.CartinhasParaNoel", "src\API.CartinhasParaNoel\API.CartinhasParaNoel.csproj", "{62314512-2B2E-475D-95C9-0EA67E3616B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62314512-2B2E-475D-95C9-0EA67E3616B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62314512-2B2E-475D-95C9-0EA67E3616B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62314512-2B2E-475D-95C9-0EA67E3616B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62314512-2B2E-475D-95C9-0EA67E3616B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{62314512-2B2E-475D-95C9-0EA67E3616B7} = {74BEBD96-A1B1-43B3-AB0D-4830C15297B3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0941E293-5912-4FC5-96EB-E18E8205337A}
+	EndGlobalSection
+EndGlobal
