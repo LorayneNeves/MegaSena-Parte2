@@ -8,7 +8,7 @@ namespace MegaSena.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class JogoController : ControllerBase
+    public class JogoController : PrincipalController
     {
         private readonly IMegaSenaService _megaSenaService;
 
@@ -20,17 +20,23 @@ namespace MegaSena.API.Controllers
         [HttpPost(Name = "Adicionar")]
         public IActionResult Post(NovaMegaSenaViewModel novaMegaSenaViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return ApiBadRequestResponse(ModelState);
+            }
+
+            if (novaMegaSenaViewModel == null)
+            {
+                return BadRequest();
+            }
             _megaSenaService.Adicionar(novaMegaSenaViewModel);
 
             return Ok();
         }
         [HttpGet(Name = "ObterTodos")]
-        public IActionResult Get(NovaMegaSenaViewModel novaMegaSenaViewModel)
+        public IActionResult Get()
         {
-            _megaSenaService.ObterTodos(novaMegaSenaViewModel);
-            List<MegaSenaViewModel> listaJogos = ();
-            listaJogos = LerJogosArquivo();
-            return Ok(listaJogos);
+            return Ok(_megaSenaService.ObterTodos());
         }
     }
     

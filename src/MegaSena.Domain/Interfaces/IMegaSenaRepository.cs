@@ -9,13 +9,8 @@ namespace MegaSena.Domain.Interfaces
 {
     public interface IMegaSenaRepository
     {
-        Task<IEnumerable<JogoMegaSena>> ObterTodos();
-        Task<JogoMegaSena> ObterPorId(Guid id);
-        Task<IEnumerable<JogoMegaSena>> Validation();
-
-        // void Validation(MegaSena megaSena);
+        IEnumerable<JogoMegaSena> ObterTodos();
         void Adicionar(JogoMegaSena megaSena);
-        void Validation(JogoMegaSena megaSena);
 
     }
 }

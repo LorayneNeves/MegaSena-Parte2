@@ -16,31 +16,22 @@ namespace MegaSena.Application.Services
         private readonly IMegaSenaRepository _megaSenaRepository;
         private IMapper _mapper;
 
-        public MegaSenaService(IMegaSenaRepository produtoRepository, IMapper mapper)
+        public MegaSenaService(IMegaSenaRepository megaSenaRepository, IMapper mapper)
         {
-            _megaSenaRepository = produtoRepository;
+            _megaSenaRepository = megaSenaRepository;
             _mapper = mapper;
         }
 
-        public void Adicionar(NovaMegaSenaViewModel novoProdutoViewModel)
+        public void Adicionar(NovaMegaSenaViewModel novoJogoViewModel)
         {
-            var novoProduto = _mapper.Map<JogoMegaSena>(novoProdutoViewModel);
-            _megaSenaRepository.Adicionar(novoProduto);
+            var novoJogo= _mapper.Map<JogoMegaSena>(novoJogoViewModel);
+            _megaSenaRepository.Adicionar(novoJogo);
 
         }
-        public Task<IEnumerable<MegaSenaViewModel>> ObterPorCategoria(int codigo)
+       
+        IEnumerable<MegaSenaViewModel> IMegaSenaService.ObterTodos()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<MegaSenaViewModel> ObterPorId(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<MegaSenaViewModel>> ObterTodos()
-        {
-            throw new NotImplementedException();
+            return _mapper.Map<IEnumerable<MegaSenaViewModel>>(_megaSenaRepository.ObterTodos());
         }
     }
 }

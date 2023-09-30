@@ -15,7 +15,7 @@ namespace MegaSena.Application.AutoMapper
         {
 
             CreateMap<MegaSenaViewModel, JogoMegaSena>()
-               .ConstructUsing(q => new JogoMegaSena(q.Codigo, q.Nome, q.CPF, q.Data, q.NumeroDoJogo));
+               .ConstructUsing(q => new JogoMegaSena(q.Nome, q.CPF, q.Data, q.NumeroDoJogo));
 
             CreateMap<NovaMegaSenaViewModel, JogoMegaSena>()
                .ConstructUsing(q => new JogoMegaSena(q.Nome, q.CPF, q.Data, q.NumeroDoJogo));
