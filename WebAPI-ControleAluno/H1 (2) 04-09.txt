@@ -1,0 +1,42 @@
+Questão 1 - Descreva 3 importantes motivos para validarmos os dados em nossa API
+
+1 - A validação dos dados ajuda a manter a integridade dos dados da API. Garantir que os dados estejam no formato certo e estejam nos criterios criados ajuda a evitar as informações incorretas ou incompletas. Isso é necessario para manter a qualidade e a confiabilidade dos dados.
+2 - Garante a segurança da API, dados maliciosos ou incorretos podem ser explorados por invasores para realizar ataques de segurança. Validar os dados de entrada ajuda a proteger a API contra vulnerabilidades e a reduzir os riscos de exploração.
+3 - Ajuda em uma melhor experiencia do usuario ao utilizar a API. Quando os dados são validados de forma consistente, os usuários recebem respostas e mensagens de erro claras em caso de problemas. Isso facilita o desenvolvimento de aplicativos que consomem a API e ajuda a reduzir o tempo gasto na depuração de problemas. Além disso, a validação dos dados pode ser necessária para cumprir requisitos de conformidade regulatória ou de segurança da indústria, por exemplo uma senha mais complexa.
+
+
+Questão 2
+Considere as seguintes entidades, descreva quais as validações você faria e como faria:
+a) Cenário 1: Cadastro de cliente com:
+a. Nome: Validar se o nome possui mais de 3 letras. Validaria com o DataAnnotations utilizando o atributo "Required", definindo o tamanho minimo de caracteres para o nome.
+b. CPF: Validar se o cpf é valido, se possui 11 numeros, se os numeros não se repetem e etc. Validaria criando uma nova classe herdada de ValidationAttribute, onde ficariam as regras de validação personalizada para o padrão de CPF do Brasil, utilizando o metodo "isValid" para validar o CPF com as respectivas regras.
+c. Data Nascimento: Validar se a data é nula e esta nos padroes de data onde tem data, mes e ano. Poderia validar também se a pessoa é maior de idade. Para isso faria como a do CPF, criaria uma classe herdada de ValidationAttribute, e colocaria as regras.
+d. Email: Validar se o email possui "@", se o email é nulo e validar o formato do email se esta correto. Para validar, criaria tambem uma classe herdada de ValidationAttribute, e aplicaria as regras verificando se é nulo e se possui o formato correto.
+e. Telefone: Validar se o numero possui DDD + 8 numeros, sendo os 4 ultimos separados por traços, exemplo: (XX) XXXX-XXXX. Criaria um novo ValidationAttribute para validar se o numero possui os padroes de formato citados.
+f. Senha: Verificar se a senha possui no minimo 8 digitos, pelo menos 1 letra maiuscula, 1 minuscula, numeros e caracteres especiais. Faria da mesma forma, criando uma classe ValidationAttribute, para validar se a senha é igual a null, se é maior ou igual a 8 e se possui os outros criterios.
+g. Cep: Verificar se o cep possui os padroes de cep do brasil e se possui 8 digitos XXXXXXXX ou XXXXX-XXX, utilizando uma classe herdada de ValidationAttribute.
+h. Rua
+i. Bairro
+j. Cidade
+k. Estado
+Para o restante do endereço (h, i, j ,k) daria para fazer com Required, para verificar se os campos são nulos ou possuem no minimo 3 caracteres. Caso necessario poderia criar um ValidationAttribute para estado(somente estados do Brasil), onde o mesmo valida se o estado informado é algum dos estados existente no país.
+b) Cenário 2: Cadastro de Disciplina
+a. Nome: Validar se o nome possui mais de 3 letras. Validaria com o DataAnnotations utilizando o atributo "Required", definindo o tamanho minimo de caracteres para o nome.
+b. Carga horária: validar se a hora é nula ou maior que zero. Para isso utilizaria uma classe herdada de ValidationAttribute.
+c. Objetivo: Validar se o objetivo possui mais de 5 letras. Validaria com o DataAnnotations utilizando o atributo "Required", definindo o tamanho minimo de caracteres para o objetivo
+d. Ementa: Validar se a ementa nao é nula. Usaria uma classe de ValidationAttribute onde la validaria o tamanho da ementa, deve ser maior que 200 carateres
+e. Semestre: Validar se o semestre é igual a 1 ou igual a 2. Ou se for semestre de periodo, dependendo da materia poderia validar usando o "range", onde validaria por exemplo, se o semestre é maior ou igual a 1 ou menor igual a 10.
+f. Ano: Validaria com o "Range" tambem, verificando se o ano esta por exemplo entre 2000 e 2100 .
+g. Nome professor: Validar se o nome possui mais de 3 letras. Validaria com o DataAnnotations utilizando o atributo "Required", definindo o tamanho minimo de caracteres para o nome.
+
+
+Questão 3 - Em sala mostramos as validações utilizando inicialmente “o bom e velho if/else”, porém falamos que esse processo pode conter vantagens e desvantagens, por isso, mostramos depois o data annotation. Descreva comparando as duas técnicas apresentando vantagens e desvantagens.
+
+A grande diferença entre as duas tecnicas é que o data annotation é apropriado para validações simples, onde as mesmas deixam os codigos mais simples, faceis de entender e manipular/configurar, porem o data annotation é limitada e nao consegue fazer validações mais complexas. Ja com o if/else é possivel fazer validações que são mais complexas, porem deixam o codigo mais complexo tambem, dificultando manter e depurar o mesmo, e a possibilidade de repetir o mesmo codigo varias vezes.
+
+
+Questão 4 - Em sala mostramos que ao usar o data annotation, quando um dado é invalidado, ele não “chamava” a action e já retornava o “error message”. Descreva o que acontecia nesse caso que ele automaticamente já validava e não caia no debug da action?
+
+Neste caso, se o dado fosse invalido, o codigo nao caia no controller e dava mensagem de erro automatica do Data annotation para garantir que o dado invalido nao seja processado pelo controller. O que acontecia era que ao aplicarmos o data annotation nas propriedades, ao inserir um dado invalido o codigo passa pela propriedade e ja verifica se é valido ou nao, se nao for ele para ali pois nao é necessario chegar ao controller. O que fizemos foi cancelar essa validação automatica e deixar ele passar pelo controller chamando a action. Foi necessario parar essa ação automatica para que pudessemos personalizar nosso data annotation. 
+
+Questão 5 - Disponivel no github
